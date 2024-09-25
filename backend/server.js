@@ -12,6 +12,7 @@ const io = socketIo(server, {
   cors: {
     origin: "http://localhost:3000", // React client
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 

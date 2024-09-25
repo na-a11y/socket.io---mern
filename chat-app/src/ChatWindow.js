@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import axios from 'axios';
 import './ChatWindow.css';
 
-const socket = io.connect('http://localhost:5000');
+const socket = io.connect('https://socket-io-mern.vercel.app');
 
 const ChatWindow = ({ currentUser }) => {
   const { username: chattingWith } = useParams();  // Get the username from the URL
@@ -16,7 +16,7 @@ const ChatWindow = ({ currentUser }) => {
 
     const fetchMessages = async () => {
       const response = await axios.get(
-        `http://localhost:5000/messages/${currentUser}/${chattingWith}`
+        `https://socket-io-mern.vercel.app/messages/${currentUser}/${chattingWith}`
       );
       setMessages(response.data);
     };
