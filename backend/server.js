@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const http = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -11,9 +12,7 @@ const server = http.createServer(app);
 
 const io = socketIo(server, {
   cors: {
-    origin: 'http://localhost:3000', // Your front-end domain
-    methods: ['GET', 'POST'],
-    credentials: true, // Allow credentials (cookies)
+   origin: '*'
   },
 });
 
@@ -21,6 +20,14 @@ const io = socketIo(server, {
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Serve static files if needed
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Add a basic route for the root URL
+app.get('/', (req, res) => {
+  res.send('Socket.IO server is running');
+});
 
 // MongoDB connection (using Atlas)
 mongoose
