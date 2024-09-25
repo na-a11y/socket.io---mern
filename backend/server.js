@@ -19,12 +19,7 @@ const io = socketIo(server, {
 
 
 // Middleware
-app.use(cors({
-  origin: 'http://localhost:3000', // Your front-end domain
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true, // Allow credentials (cookies)
-}));
+app.use(cors());
 app.use(express.json());
 
 // MongoDB connection (using Atlas)
