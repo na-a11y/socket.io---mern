@@ -4,7 +4,10 @@ import io from 'socket.io-client';
 import axios from 'axios';
 import './ChatWindow.css';
 
-const socket = io.connect('https://socket-io-mern.vercel.app');
+const socket = io("https://socket-io-mern.vercel.app", {
+  withCredentials: true, // Allow credentials (cookies)
+});
+
 
 const ChatWindow = ({ currentUser }) => {
   const { username: chattingWith } = useParams();  // Get the username from the URL

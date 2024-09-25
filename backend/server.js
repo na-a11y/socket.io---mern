@@ -8,14 +8,23 @@ require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
+
 const io = socketIo(server, {
-
-    cors: { origin: '*' },
-
+  cors: {
+    origin: 'http://localhost:3000', // Your front-end domain
+    methods: ['GET', 'POST'],
+    credentials: true, // Allow credentials (cookies)
+  },
 });
 
+
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // Your front-end domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true, // Allow credentials (cookies)
+}));
 app.use(express.json());
 
 // MongoDB connection (using Atlas)
